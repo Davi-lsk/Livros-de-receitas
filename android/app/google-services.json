@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "402258630979",
+    "project_id": "jogo-forca-ddm",
+    "storage_bucket": "jogo-forca-ddm.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:402258630979:android:c6f18dbb03ab41cebb37f6",
+        "android_client_info": {
+          "package_name": "br.com.CaioCorporation.flutter_application_2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDo6o5F-3Xaw68P3IXwo6C7B2h2TrFlQE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
