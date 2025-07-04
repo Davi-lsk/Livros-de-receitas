@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'adicionar_receita.dart';
+import 'adicionar_receita.dart'; // Tela de adicionar
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-
+void main() {
   runApp(MaterialApp(
     home: ListaReceitas(),
-    debugShowCheckedModeBanner: false,
   ));
 }
 
@@ -19,32 +13,26 @@ class ListaReceitas extends StatefulWidget {
 }
 
 class _ListaReceitasState extends State<ListaReceitas> {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  // Lista de receitas: cada receita é um mapa com nome e ingredientes
   List<Map<String, dynamic>> receitas = [];
 
-  @override
-  void initState() {
-    super.initState();
-    _carregarReceitasDoFirebase();
-  }
-
-  // Carrega todas as receitas do Firestore
-  Future<void> _carregarReceitasDoFirebase() async {
-    final snapshot = await _firestore.collection('receitas').get();
+  // Adiciona uma nova receita à lista
+  void _adicionarNovaReceita(Map<String, dynamic> novaReceita) {
     setState(() {
-      receitas = snapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
-          .toList();
+      receitas.add(novaReceita);
     });
   }
 
-  // Vai para a tela de adicionar e recarrega as receitas ao voltar
+  // Abre a tela de adicionar receita e aguarda o retorno
   void _irParaAdicionarReceita() async {
-    await Navigator.push(
+    final resultado = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => AdicionarReceita()),
     );
-    _carregarReceitasDoFirebase(); // Recarrega após retorno
+
+    if (resultado != null && resultado is Map<String, dynamic>) {
+      _adicionarNovaReceita(resultado);
+    }
   }
 
   @override
@@ -53,7 +41,7 @@ class _ListaReceitasState extends State<ListaReceitas> {
       appBar: AppBar(
         title: Text('Minhas Receitas'),
         backgroundColor: const Color.fromARGB(200, 127, 176, 255),
-      ),
+        ),
       body: receitas.isEmpty
           ? Center(child: Text('Nenhuma receita adicionada'))
           : ListView.builder(
@@ -62,10 +50,8 @@ class _ListaReceitasState extends State<ListaReceitas> {
                 final receita = receitas[index];
                 return ExpansionTile(
                   title: Text(receita['nome']),
-                  children: (receita['ingredientes'] as List<dynamic>)
-                      .map((ingrediente) => ListTile(
-                            title: Text(ingrediente),
-                          ))
+                  children: (receita['ingredientes'] as List<String>)
+                      .map((ingrediente) => ListTile(title: Text(ingrediente)))
                       .toList(),
                 );
               },

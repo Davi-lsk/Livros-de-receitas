@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AdicionarReceita extends StatefulWidget {
   @override
@@ -12,61 +11,32 @@ class _AdicionarReceitaState extends State<AdicionarReceita> {
     TextEditingController()
   ];
 
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
   void _adicionarCampoIngrediente() {
     setState(() {
       _ingredienteControllers.add(TextEditingController());
     });
   }
 
-  Future<void> _salvarReceita() async {
-    final String nome = _nomeController.text.trim();
-    final List<String> ingredientes = _ingredienteControllers
+  void _salvarReceita() {
+    final nome = _nomeController.text.trim();
+    final ingredientes = _ingredienteControllers
         .map((c) => c.text.trim())
         .where((texto) => texto.isNotEmpty)
         .toList();
 
     if (nome.isNotEmpty && ingredientes.isNotEmpty) {
-      try {
-        await _firestore.collection('receitas').add({
-          'nome': nome,
-          'ingredientes': ingredientes,
-        });
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Receita salva com sucesso!')),
-        );
-
-        Navigator.pop(context); // volta para tela principal
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Erro ao salvar: $e')),
-        );
-      }
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Preencha todos os campos')),
-      );
+      Navigator.pop(context, {
+        'nome': nome,
+        'ingredientes': ingredientes,
+      });
     }
   }
 
-  @override
-  void dispose() {
-    _nomeController.dispose();
-    for (var controller in _ingredienteControllers) {
-      controller.dispose();
-    }
-    super.dispose();
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Adicionar Receita'),
-        backgroundColor: const Color.fromARGB(200, 127, 176, 255),
-      ),
+      appBar: AppBar(title: Text('Adicionar Receita')),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20),
         child: Column(
@@ -104,19 +74,16 @@ class _AdicionarReceitaState extends State<AdicionarReceita> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _salvarReceita,
               child: Text('Salvar'),
+              onPressed: _salvarReceita,
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
+              onPressed: (){
                 Navigator.pop(context);
-              },
-              child: Text('Voltar'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.grey[600],
-              ),
-            ),
+              }, 
+            child: Text('Voltar')
+            )
           ],
         ),
       ),
