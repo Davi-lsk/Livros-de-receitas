@@ -1,16 +1,72 @@
-# flutter_application_2
+# 🍽️ App de Receitas em Flutter
 
-A new Flutter project.
+Aplicativo de receitas feito com **Flutter** e **Firebase Firestore**. Nele, é possível cadastrar receitas informando o nome do prato e uma lista dinâmica de ingredientes, e consultar todas as receitas já registradas.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🚀 Funcionalidades
 
-A few resources to get you started if this is your first Flutter project:
+- 🔍 **Consultar Receitas:** Visualize as receitas cadastradas na tela principal.
+- ➕ **Adicionar Receita:** Crie receitas com múltiplos ingredientes.
+- 🧠 **Firestore em tempo real:** Os dados são armazenados e atualizados usando o Firebase.
+- 📱 **Experiência amigável:** Interface simples e intuitiva.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🖼️ Detalhamento das Telas
+
+### 🟡 Splash Screen
+
+- Mensagem de boas-vindas: "Bem-vindo ao Minhas Receitas"
+- Exibe o logo centralizado
+- Tela de entrada inicial antes de redirecionar automaticamente à tela principal.
+
+📸  
+![Splash Screen](./assets/screenshots/splash-screen.jpeg)
+
+---
+
+### 🟢 Tela Principal (Main)
+
+- Mostra a lista de receitas cadastradas (ou mensagem "Nenhuma receita adicionada")
+- Cada receita aparece em um card com nome e ingredientes.
+- Botão flutuante de “+” leva à tela de adicionar.
+
+📸  
+![Tela Principal](./assets/screenshots/main.jpeg)
+
+---
+
+### 🔵 Tela de Adicionar Receita
+
+- Formulário com:
+  - Campo para nome da receita
+  - Campos dinâmicos para ingredientes
+  - Botões de adicionar ingrediente, salvar e voltar
+
+📸  
+![Tela de Adicionar Receita](./assets/screenshots/adicionar receita.jpeg)
+
+---
+
+### ☁️ Firebase Firestore
+
+- As receitas são salvas na coleção `receitas`
+- Cada documento possui campos:
+  - `nome`: string
+  - `ingredientes`: lista de strings
+
+📸  
+![Banco de Dados Firebase](./assets/screenshots/banco de dados.jpeg)
+
+---
+
+## 📁 Estrutura do Projeto
+
+```text
+lib/
+├── main.dart                # Tela principal com receitas
+├── splash_screen.dart       # Tela inicial de boas-vindas
+├── adicionar_receita.dart   # Formulário de criação
+├── firebase_service.dart    # Lógica Firebase
+
