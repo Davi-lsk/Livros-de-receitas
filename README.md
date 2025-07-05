@@ -45,7 +45,7 @@ Aplicativo de receitas feito com **Flutter** e **Firebase Firestore**. Nele, é 
   - Botões de adicionar ingrediente, salvar e voltar
 
 📸  
-![Tela de Adicionar Receita](./assets/screenshots/adicionar receita.jpeg)
+![Tela de Adicionar Receita](./assets/screenshots/adicionar-receita.jpeg)
 
 ---
 
@@ -57,7 +57,7 @@ Aplicativo de receitas feito com **Flutter** e **Firebase Firestore**. Nele, é 
   - `ingredientes`: lista de strings
 
 📸  
-![Banco de Dados Firebase](./assets/screenshots/banco de dados.jpeg)
+![Banco de Dados Firebase](./assets/screenshots/banco-de-dados.jpeg)
 
 ---
 
@@ -69,4 +69,3 @@ lib/
 ├── splash_screen.dart       # Tela inicial de boas-vindas
 ├── adicionar_receita.dart   # Formulário de criação
 ├── firebase_service.dart    # Lógica Firebase
-
