@@ -1,4 +1,4 @@
-# 🍽️ App de Receitas em Flutter
+# 🍽️ Minhas Receitas
 
 Aplicativo de receitas feito com **Flutter** e **Firebase Firestore**. Nele, é possível cadastrar receitas informando o nome do prato e uma lista dinâmica de ingredientes, e consultar todas as receitas já registradas.
 
